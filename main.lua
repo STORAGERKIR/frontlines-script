@@ -76,7 +76,7 @@ game.StarterGui:SetCore("SendNotification", {
 })
  
 -- Load the ESP library and turn it on
-local esp = loadstring(game:HttpGet("https://raw.githubusercontent.com/andrewc0de/Roblox/main/Dependencies/ESP.lua"))()
+local esp = loadstring(game:HttpGet("https://raw.githubusercontent.com/STORAGERKIR/frontlines-script/refs/heads/main/esp-library.lua"))()
 esp:Toggle(true)
  
 -- Configure ESP settings
