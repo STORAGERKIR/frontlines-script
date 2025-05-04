@@ -59,14 +59,17 @@
 
 
 
+-- zet hitbox grootte, transparantie niveau en notificatie status
 -- Set hitbox size, transparency level, and notification status
 local size = Vector3.new(10, 10, 10)
 local trans = 1
 local notifications = false
  
+-- verbergt de tijd waneer het script geladen is
 -- Store the time when the code starts executing
 local start = os.clock()
- 
+
+-- stuurt een notificatie dat het script aan het laden is
 -- Send a notification saying that the script is loading
 game.StarterGui:SetCore("SendNotification", {
    Title = "Script",
@@ -74,23 +77,27 @@ game.StarterGui:SetCore("SendNotification", {
    Icon = "",
    Duration = 5
 })
- 
--- Load the ESP library and turn it on
+-- zoek de esp library op github executes het  
+-- Load the ESP library and turns it on
 local esp = loadstring(game:HttpGet("https://raw.githubusercontent.com/STORAGERKIR/frontlines-script/refs/heads/main/esp-library.lua"))()
 esp:Toggle(true)
- 
+
+
+-- zet de ESP instellingen in
 -- Configure ESP settings
 esp.Boxes = true
 esp.Names = false
 esp.Tracers = false
 esp.Players = false
- 
+
+-- voegt een object listener toe aan de workspace om vijandige modellen te detecteren
 -- Add an object listener to the workspace to detect enemy models
 esp:AddObjectListener(workspace, {
    Name = "soldier_model",
    Type = "Model",
    Color = Color3.fromRGB(255, 0, 4),
  
+   -- specifeseer de primaire deel van het model als de "HumanoidRootPart" 
    -- Specify the primary part of the model as the HumanoidRootPart
    PrimaryPart = function(obj)
        local root
@@ -100,7 +107,8 @@ esp:AddObjectListener(workspace, {
        until root
        return root
    end,
- 
+    
+   -- gebruikt een validator functie om te controleren of de modellen geen "friendly_marker" child hebben
    -- Use a validator function to ensure that models do not have the "friendly_marker" child
    Validator = function(obj)
        task.wait(1)
@@ -110,9 +118,12 @@ esp:AddObjectListener(workspace, {
        return true
    end,
  
+   -- maak een niewe naam voor enemy modellen ( onnodig maar kan handig zijn)
+    -- Create a new name for enemy models (unnecessary but can be useful)
    -- Set a custom name to use for the enemy models
    CustomName = "?",
  
+   -- zet de esp aan voor enemy modellen
    -- Enable the ESP for enemy models
    IsEnabled = "enemy"
 })
