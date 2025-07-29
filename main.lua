@@ -73,7 +73,7 @@ local start = os.clock()
 -- Send a notification saying that the script is loading
 game.StarterGui:SetCore("SendNotification", {
    Title = "Script",
-   Text = "Loading script...",
+   Text = "Loading...",
    Icon = "",
    Duration = 5
 })
@@ -86,7 +86,7 @@ esp:Toggle(true)
 -- zet de ESP instellingen in
 -- Configure ESP settings
 esp.Boxes = true
-esp.Names = false
+esp.Names = true
 esp.Tracers = false
 esp.Players = false
 
